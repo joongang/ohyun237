@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titration Experiment Program</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="pH">Titration Experiment Program</div>
+    <div class="middle">
+        <div>
+
+        <div class="table">
+        </div>
+        </div>
+        <img src="graph.png" alt="" class="gp">
+    </div>
+    <div class="all_container">
+    <div class="calculator-container">
+    
+        <label for="a">a:</label>
+        <input type="number" id="a" />
+      
+        <label for="M1">M1(M) :</label>
+        <input type="number" id="M1" />
+      
+        <label for="V1">V1(mL):</label>
+        <input type="number" id="V1" />
+      
+        <label for="b">b:</label>
+        <input type="number" id="b" />
+      
+        <label for="V2">V2(mL):</label>
+        <input type="number" id="V2" />
+      
+        <button onclick="calculateM2()">ENTER</button>
+      
+    </div>
+    <p id="result"></p>
+  </div>
+
+
+  <script>
+    function calculateM2() {
+      var a = parseFloat(document.getElementById("a").value);
+      var M1 = parseFloat(document.getElementById("M1").value);
+      var V1 = parseFloat(document.getElementById("V1").value);
+      var b = parseFloat(document.getElementById("b").value);
+      var V2 = parseFloat(document.getElementById("V2").value);
+
+      var M2 = (a * M1 * V1) / (b * V2);
+
+      document.getElementById("result").innerHTML = "계산 결과: " + M2 +"M";
+    }
+  </script>
+
+</body>
+</html>

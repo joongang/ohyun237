@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titration Experiment Program</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="pH">Titration Experiment Program</div>
+    <div class="middle">
+        <div>
+
+        <div class="table"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: center;">
+      <th></th>
+      <th>pH</th>
+      <th>temp</th>
+      <th>EC</th>
+      <th>addedVol</th>
+      <th>totalAddedVol</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>9.0</td>
+      <td>24.0</td>
+      <td>0.5</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>9.0</td>
+      <td>24.0</td>
+      <td>0.5</td>
+      <td>1.0</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>9.0</td>
+      <td>24.0</td>
+      <td>0.5</td>
+      <td>1.0</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9.0</td>
+      <td>24.0</td>
+      <td>0.5</td>
+      <td>1.0</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9.0</td>
+      <td>24.0</td>
+      <td>0.5</td>
+      <td>1.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>9.0</td>
+      <td>24.0</td>
+      <td>0.5</td>
+      <td>1.0</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>9.0</td>
+      <td>24.0</td>
+      <td>0.5</td>
+      <td>1.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>9.0</td>
+      <td>24.0</td>
+      <td>0.5</td>
+      <td>1.0</td>
+      <td>8.0</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        </div>
+        <img src="graph.png" alt="" class="gp">
+    </div>
+    <div class="all_container">
+    <div class="calculator-container">
+    
+        <label for="a">a:</label>
+        <input type="number" id="a" />
+      
+        <label for="M1">M1(M) :</label>
+        <input type="number" id="M1" />
+      
+        <label for="V1">V1(mL):</label>
+        <input type="number" id="V1" />
+      
+        <label for="b">b:</label>
+        <input type="number" id="b" />
+      
+        <label for="V2">V2(mL):</label>
+        <input type="number" id="V2" />
+      
+        <button onclick="calculateM2()">ENTER</button>
+      
+    </div>
+    <p id="result"></p>
+  </div>
+
+
+  <script>
+    function calculateM2() {
+      var a = parseFloat(document.getElementById("a").value);
+      var M1 = parseFloat(document.getElementById("M1").value);
+      var V1 = parseFloat(document.getElementById("V1").value);
+      var b = parseFloat(document.getElementById("b").value);
+      var V2 = parseFloat(document.getElementById("V2").value);
+
+      var M2 = (a * M1 * V1) / (b * V2);
+
+      document.getElementById("result").innerHTML = "계산 결과: " + M2 +"M";
+    }
+  </script>
+
+</body>
+</html>
