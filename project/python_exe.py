@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
 from tkinter import *
 import webbrowser
 
@@ -34,6 +35,40 @@ def getDataAndGraph(vol2):
 
 def calculate(n1, m1, v1, n2, v2):
     return n1*m1*v1/(n2*v2)
+
+def granPlot(df):
+    if df['pH'].iloc[0] < df['pH'].iloc[-1]:
+        unknownAcidity = 1
+    else:
+        unknownAcidity = 0
+    for i in range(len(df)):
+        if unknownAcidity:
+            if df['pH'].iloc[i] >= 7:
+                VePoint = i
+                break
+        else:
+            if df['pH'].iloc[i] <= 8:
+                VePoint = i
+                break
+    Ve09 = df['totalAddedVol'].iloc[VePoint] * 0.9
+    for i in range(len(df)):
+        if unknownAcidity:
+            if df['totalAddedVol'].iloc[i] >= Ve09:
+                Ve09Point = i
+                break
+        else:
+            if df['totalAddedVol'].iloc[i] <= Ve09:
+                Ve09Point = i
+                break
+    filtered_df = df.iloc[Ve09Point:VePoint+1]
+    filtered_df.loc[:, ['Hdensity']] = filtered_df.loc[:, ['totalAddedVol']] * 10 ** (-filtered_df.loc[:, ['pH']])
+    x = np.array(filtered_df['totalAddedVol'])
+    y = np.array(filtered_df['Hdensity'])
+    x = x.reshape(-1, 1)
+    y = y.reshape(-1, 1)
+    model = LinearRegression()
+    model.fit(x, y)
+    return model.intercept_
 
 plt.figure(figsize=(12,8))
 plt.subplot(3, 1, 1)
