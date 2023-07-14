@@ -19,31 +19,33 @@ def getDataAndGraph(vol2):
     lst += [vol.get(), vol2]
     df.loc[len(df)] = lst
 
-    plt.figure(figsize=(15,10))
+    plt.figure(figsize=(12,8))
     plt.subplot(3, 1, 1)
     plt.plot(df['totalAddedVol'], df['pH'])
-    plt.ylabel('pH')
+    plt.ylabel('pH', fontdict={'size':15})
     plt.subplot(3, 1, 2)
     plt.plot(df['totalAddedVol'], df['temp'])
-    plt.ylabel('Temperature')
+    plt.ylabel('Temperature', fontdict={'size':15})
     plt.subplot(3, 1, 3)
     plt.plot(df['totalAddedVol'], df['EC'])
-    plt.ylabel('Electrical conduction')
+    plt.xlabel('volume(mL)', fontdict={'size':15})
+    plt.ylabel('Electrical conduction', fontdict={'size':15})
     plt.savefig('graph.png')
 
 def calculate(n1, m1, v1, n2, v2):
     return n1*m1*v1/(n2*v2)
 
-plt.figure(figsize=(15,10))
+plt.figure(figsize=(12,8))
 plt.subplot(3, 1, 1)
 plt.plot([0], [0])
-plt.ylabel('pH')
+plt.ylabel('pH', fontdict={'size':15})
 plt.subplot(3, 1, 2)
 plt.plot([0], [0])
-plt.ylabel('Temperature')
+plt.ylabel('Temperature', fontdict={'size':15})
 plt.subplot(3, 1, 3)
 plt.plot([0], [0])
-plt.ylabel('Electrical conduction')
+plt.xlabel('volume(mL)', fontdict={'size':15})
+plt.ylabel('Electrical conduction', fontdict={'size':15})
 plt.savefig('graph.png')
 
 root = Tk()

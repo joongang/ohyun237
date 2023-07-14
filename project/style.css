@@ -21,9 +21,15 @@
 }
 .table{
     border: 2px solid black;
-    width: 300px;
+    width: 350px;
     height: 350px;
     margin-top: 10px;
+    overflow: auto;
+}
+.dataframe{
+    width: 320px;
+    justify-content: center;
+    justify-self: center;
 }
 .calculator-container {
     width: 600px;
