@@ -8,16 +8,21 @@
 </head>
 <body>
     <div class="pH">Titration Experiment Program</div>
-    <div class="middle">
+      <div class="middle">
         <div>
-
-        <div class="table">
+          <div class="table"></div>
         </div>
-        </div>
-        <img src="graph.png" alt="" class="gp">
+        <img id = "img" img src="graph.png" alt="" class="gp">
     </div>
+    
+    <div class = "change-button">
+      <button onclick="change2basic()">change to basic graph</button>
+      <button onclick="change2gran()">change to gran plot</button>
+      <button onclick="change2differ()">change to derivate graph</button> 
+    </div>
+    
     <div class="all_container">
-    <div class="calculator-container">
+      <div class="calculator-container">
     
         <label for="a">a:</label>
         <input type="number" id="a" />
@@ -35,10 +40,9 @@
         <input type="number" id="V2" />
       
         <button onclick="calculateM2()">ENTER</button>
-      
-    </div>
+      </div>
     <p id="result"></p>
-  </div>
+    </div>
 
 
   <script>
@@ -52,6 +56,16 @@
       var M2 = (a * M1 * V1) / (b * V2);
 
       document.getElementById("result").innerHTML = "result: " + M2 +"M";
+    }
+
+    function change2gran() {
+      document.getElementById("img").src = "grangraph.png"
+    }
+    function change2basic() {
+      document.getElementById("img").src = "graph.png"
+    }
+    function change2differ() {
+      document.getElementById("img").src = "differgraph.png"
     }
   </script>
 

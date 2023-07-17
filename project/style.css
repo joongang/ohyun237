@@ -9,8 +9,14 @@
 }
 .gp{
     width: 600px;
-    height: 430px;
+    height: 400px;
     border: 2px solid black;
+}
+
+.change-button {
+  position: relative;
+  left:660px;
+  bottom: 25px;
 }
 
 .question{
