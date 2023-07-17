@@ -60,7 +60,7 @@ def granPlot(df):
             if df['totalAddedVol'].iloc[i] <= Ve09:
                 Ve09Point = i
                 break
-    filtered_df = df.iloc[Ve09Point:VePoint+1]
+    filtered_df = df.iloc[Ve09Point:VePoint+1].copy()
     filtered_df.loc[:, ['Hdensity']] = filtered_df.loc[:, ['totalAddedVol']] * 10 ** (-filtered_df.loc[:, ['pH']])
     x = np.array(filtered_df['totalAddedVol'])
     y = np.array(filtered_df['Hdensity'])
@@ -68,7 +68,45 @@ def granPlot(df):
     y = y.reshape(-1, 1)
     model = LinearRegression()
     model.fit(x, y)
-    return model.intercept_
+    return filtered_df, -model.intercept_/model.coef_
+
+def granGraph(df, filtered_df, intercept):
+    plt.figure(figsize=(12,8))
+    plt.subplot(2, 1, 1)
+    plt.plot(df['totalAddedVol'], df['pH'])
+    plt.ylabel('pH', fontdict={'size':15})
+    plt.xlabel('volume(mL)', fontdict={'size':15})
+    plt.subplot(2, 1, 2)
+    plt.plot(filtered_df['totalAddedVol'], filtered_df['Hdensity'])
+    plt.ylabel('H density', fontdict={'size':15})
+    plt.xlabel('volume(mL)', fontdict={'size':15})
+    plt.text(intercept, 0, intercept, fontdict={'size':15, 'alpha':0.5})
+    plt.savefig('grangraph.png')
+
+def differentiate(df):
+    df2 = df.iloc[:-1].copy()
+    df2['differ'] = [0]*len(df2)
+    for i in range(len(df2)):
+        df2['differ'].iloc[i] = (df['pH'].iloc[i+1] - df['pH'].iloc[i]) / (df['totalAddedVol'].iloc[i+1] - df['totalAddedVol'].iloc[i])
+    df3 = df2.iloc[:-1].copy()
+    df3['differ2'] = [0]*len(df3)
+    for i in range(len(df3)):
+        df3['differ2'].iloc[i] = (df2['differ'].iloc[i+1] - df2['differ'].iloc[i]) / (df2['totalAddedVol'].iloc[i+1] - df2['totalAddedVol'].iloc[i])
+    return df3
+
+def differGraph(df):
+    plt.figure(figsize=(12,8))
+    plt.subplot(3, 1, 1)
+    plt.plot(df['totalAddedVol'], df['pH'])
+    plt.ylabel('pH', fontdict={'size':15})
+    plt.subplot(3, 1, 2)
+    plt.plot(df['totalAddedVol'], df['differ'])
+    plt.ylabel('derivative', fontdict={'size':15})
+    plt.subplot(3, 1, 3)
+    plt.plot(df['totalAddedVol'], df['differ2'])
+    plt.ylabel('second derivative', fontdict={'size':15})
+    plt.xlabel('volume(mL)', fontdict={'size':15})
+    plt.savefig('differgraph.png')
 
 plt.figure(figsize=(12,8))
 plt.subplot(3, 1, 1)
@@ -120,5 +158,8 @@ file2.write(tlist[1])
 file1.close()
 file2.close()
 file3.close()
+
+granGraph(df, *granPlot(df))
+differGraph(differentiate(df))
 
 webbrowser.open_new_tab('index1.html')
