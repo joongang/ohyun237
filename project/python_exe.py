@@ -68,7 +68,7 @@ def granPlot(df):
     y = y.reshape(-1, 1)
     model = LinearRegression()
     model.fit(x, y)
-    return filtered_df, -model.intercept_/model.coef_
+    return filtered_df, float(-model.intercept_[0]/model.coef_[0])
 
 def granGraph(df, filtered_df, intercept):
     plt.figure(figsize=(12,8))
