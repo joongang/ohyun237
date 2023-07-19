@@ -137,7 +137,7 @@ button.grid(row=1, column=4, sticky='w')
 exitButton.grid(row=2, column=3, sticky='n')
 
 button.bind('<Button-1>', enter)
-button.bind('<Return>', enter)
+entry.bind('<Return>', enter)
 
 vol = DoubleVar()
 vol2 = 0
