@@ -15,7 +15,7 @@ def enter(event):
 
 def getDataAndGraph(vol2):
     global df
-    df1 = pd.read_csv('sampleData.csv')
+    df1 = pd.read_csv('ard_sensor_daq_log.csv')
     lst = list(df1.iloc[-1])
     lst += [vol.get(), vol2]
     df.loc[len(df)] = lst
@@ -142,6 +142,10 @@ entry.bind('<Return>', enter)
 vol = DoubleVar()
 vol2 = 0
 df = pd.DataFrame(columns=['pH', 'temp', 'EC', 'addedVol', 'totalAddedVol'])
+df1 = pd.read_csv('ard_sensor_daq_log.csv')
+lst = list(df1.iloc[-1])
+lst += [0, 0]
+df.loc[len(df)] = lst
 
 root.mainloop()
 
